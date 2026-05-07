@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alyssa Phillips — AI Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #0c0814;
+      --bg-mid:       #130f1f;
+      --surface:      #1a1628;
+      --border:       #2a2040;
+      --border-dim:   #1f1832;
+      --accent:       #c8a96e;
+      --accent-dim:   #9e8054;
+      --lavender:     #9b7fc7;
+      --lavender-dim: #6d558f;
+      --text:         #f0ebf5;
+      --text-mid:     #c8bfd8;
+      --muted:        #6e6480;
+      --font-display: 'Cormorant', serif;
+      --font-body:    'Jost', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* ── AMBIENT GLOWS ── */
+    .glow-top {
+      position: fixed;
+      top: -20vh; left: 50%;
+      transform: translateX(-50%);
+      width: 80vw; height: 60vh;
+      background: radial-gradient(ellipse at center, rgba(120, 60, 200, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow-bottom {
+      position: fixed;
+      bottom: -20vh; right: -10vw;
+      width: 60vw; height: 60vh;
+      background: radial-gradient(ellipse at center, rgba(90, 40, 160, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── GRAIN ── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.5;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 4rem;
+      transition: background 0.5s, border-color 0.5s, padding 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      padding: 1.25rem 4rem;
+      background: rgba(12, 8, 20, 0.88);
+      backdrop-filter: blur(20px);
+      border-color: var(--border-dim);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 300;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+    .nav-links a {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--text-mid); }
+
+    /* ── ORNAMENT ── */
+    .ornament {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .ornament-line {
+      height: 1px;
+      width: 3rem;
+      background: linear-gradient(to right, transparent, var(--accent));
+    }
+    .ornament-line.right {
+      background: linear-gradient(to left, transparent, var(--accent));
+    }
+    .ornament-diamond {
+      width: 5px; height: 5px;
+      background: var(--accent);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+    .ornament-text {
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 4rem 4rem;
+      z-index: 1;
+    }
+
+    .hero-inner { max-width: 900px; padding-bottom: 7rem; }
+
+    .hero-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.2s;
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(4.5rem, 10vw, 10rem);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      line-height: 0.9;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.4s;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2.4rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--lavender);
+      letter-spacing: 0.06em;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.6s;
+    }
+
+    .hero-rule {
+      width: 1px;
+      height: 5rem;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      margin: 0 auto 3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.7s;
+    }
+
+    .hero-desc {
+      font-weight: 300;
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      max-width: 50ch;
+      margin: 0 auto 3.5rem;
+      letter-spacing: 0.03em;
+      line-height: 1.85;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.85s;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid var(--accent-dim);
+      color: var(--accent);
+      padding: 0.9rem 2.5rem;
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.35s;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 1s;
+      position: relative;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .hero-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+      z-index: -1;
+    }
+    .hero-cta:hover { color: var(--bg); border-color: var(--accent); }
+    .hero-cta:hover::before { transform: scaleX(1); }
+
+    .hero-scroll {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: auto;
+      padding-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 1.2s;
+    }
+    .hero-scroll span {
+      font-size: 0.58rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .scroll-line {
+      width: 1px; height: 3rem;
+      background: linear-gradient(to bottom, var(--muted), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0 4rem;
+      z-index: 1;
+      position: relative;
+    }
+    .divider-line { flex: 1; height: 1px; background: var(--border); }
+    .divider-mark {
+      width: 6px; height: 6px;
+      border: 1px solid var(--accent-dim);
+      transform: rotate(45deg);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      position: relative;
+      padding: 7rem 4rem;
+      z-index: 1;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      column-gap: 5rem;
+      row-gap: 0;
+      align-items: stretch;
+      margin-top: 4rem;
+    }
+    .about-divider {
+      width: 1px;
+      min-height: 100%;
+      background: linear-gradient(to bottom, transparent, var(--border) 15%, var(--border) 85%, transparent);
+      justify-self: center;
+    }
+    .about-lead {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 2rem;
+    }
+    .about-lead em { font-style: italic; color: var(--lavender); }
+    .about-body {
+      font-weight: 300;
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.9;
+      letter-spacing: 0.02em;
+    }
+    .about-body p + p { margin-top: 1rem; }
+    .skill-list { display: flex; flex-direction: column; gap: 0; margin-top: 3rem; }
+    .skill-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border-dim);
+      transition: border-color 0.3s;
+    }
+    .skill-item:first-child { border-top: 1px solid var(--border-dim); }
+    .skill-item:hover { border-bottom-color: var(--lavender-dim); }
+    .skill-name {
+      font-size: 0.78rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--text-mid);
+    }
+    .skill-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent-dim); }
+
+    /* ── SECTION HEADER ── */
+    .section-num {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      color: var(--text);
+    }
+    .section-heading em { font-style: italic; color: var(--lavender); }
+
+    /* ── PROJECTS ── */
+    .project-list { margin-top: 4rem; }
+    .project-item {
+      display: grid;
+      grid-template-columns: 4rem 1fr auto;
+      gap: 3rem;
+      align-items: start;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border-dim);
+      position: relative;
+      transition: all 0.3s;
+      cursor: default;
+    }
+    .project-item:first-child { border-top: 1px solid var(--border-dim); }
+    .project-item::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 0;
+      background: linear-gradient(to right, rgba(155, 127, 199, 0.06), transparent);
+      transition: width 0.4s ease;
+    }
+    .project-item:hover::before { width: 100%; }
+    .project-num {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      color: var(--accent-dim);
+      padding-top: 0.3rem;
+    }
+    .project-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2vw, 1.8rem);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      margin-bottom: 0.6rem;
+      color: var(--text);
+      transition: color 0.3s;
+    }
+    .project-item:hover .project-title { color: var(--lavender); }
+    .project-desc {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 55ch;
+    }
+    .project-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      align-items: flex-end;
+      padding-top: 0.3rem;
+    }
+    .project-tag {
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--lavender-dim);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.75rem;
+      white-space: nowrap;
+    }
+
+    /* ── EXPERTISE ── */
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border-dim);
+      margin-top: 4rem;
+    }
+    .expertise-card {
+      background: var(--bg);
+      padding: 3rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s;
+    }
+    .expertise-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--lavender-dim), transparent);
+      transform: scaleX(0);
+      transition: transform 0.4s;
+    }
+    .expertise-card:hover { background: var(--bg-mid); }
+    .expertise-card:hover::after { transform: scaleX(1); }
+    .expertise-num {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+    .expertise-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.02em;
+    }
+    .expertise-desc {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    /* ── CONTACT ── */
+    .contact-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .contact-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin: 2rem 0 1.5rem;
+    }
+    .contact-tagline em { display: block; font-style: italic; color: var(--lavender); }
+    .contact-sub {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 3.5rem;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border: 1px solid var(--border);
+      padding: 0.9rem 2rem;
+      text-decoration: none;
+      color: var(--text-mid);
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .contact-link::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--lavender);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.3s ease;
+      z-index: -1;
+    }
+    .contact-link:hover { color: var(--bg); border-color: var(--lavender); }
+    .contact-link:hover::before { transform: scaleY(1); }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border-dim);
+      padding: 2.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p {
+      font-size: 0.65rem;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .footer-diamond {
+      width: 5px; height: 5px;
+      background: var(--accent-dim);
+      transform: rotate(45deg);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav, section, footer { padding-left: 2rem; padding-right: 2rem; }
+      .divider { padding: 0 2rem; }
+      .hero { padding: 7rem 2rem 5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-divider { display: none; }
+      .expertise-grid { grid-template-columns: 1fr; }
+      .project-item { grid-template-columns: 1fr; gap: 0.75rem; }
+      .project-num { display: none; }
+      .project-meta { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+      .contact-links { flex-direction: column; align-items: center; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+      nav { padding: 1.5rem 2rem; }
+      nav.scrolled { padding: 1rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-top"></div>
+  <div class="glow-bottom"></div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-logo">Alyssa Phillips</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Work</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Security · Governance · Artificial Intelligence</p>
+      <h1 class="hero-name">Alyssa Phillips</h1>
+      <p class="hero-subtitle">Where rigor meets intelligence.</p>
+      <div class="hero-rule"></div>
+      <p class="hero-desc">
+        GRC and Security Program Manager building at the frontier of AI — crafting agentic systems, intelligent workflows, and governance frameworks that are worthy of the moment we're in.
+      </p>
+      <a href="#projects" class="hero-cta">View Selected Work</a>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-mark"></div><div class="divider-line"></div></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="reveal">
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-diamond"></div>
+        <span class="ornament-text">About</span>
+      </div>
+      <p class="section-num">01</p>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p class="about-lead">I build programs that are <em>intelligent by design</em> — not as an afterthought.</p>
+        <div class="about-body">
+          <p>My work sits at the intersection of security program management and applied AI. I design governance frameworks and risk programs with the same systems-level precision I bring to building agentic tools and automation pipelines.</p>
+          <p>Based in the Blue Ridge Mountains of North Carolina. Fully remote. Relentlessly building.</p>
+        </div>
+      </div>
+      <div class="about-divider"></div>
+      <div class="reveal reveal-delay-2">
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-name">GRC & Security Program Management</span><span class="skill-dot"></span></div>
+          <div class="skill-item"><span class="skill-name">Agentic AI Architecture</span><span class="skill-dot"></span></div>
+          <div class="skill-item"><span class="skill-name">Prompt Engineering</span><span class="skill-dot"></span></div>
+          <div class="skill-item"><span class="skill-name">Claude Code & AI Tooling</span><span class="skill-dot"></span></div>
+          <div class="skill-item"><span class="skill-name">Risk Assessment & Frameworks</span><span class="skill-dot"></span></div>
+          <div class="skill-item"><span class="skill-name">AI Governance & Policy</span><span class="skill-dot"></span></div>
+          <div class="skill-item"><span class="skill-name">Security Strategy</span><span class="skill-dot"></span></div>
+          <div class="skill-item"><span class="skill-name">Compliance & Audit Readiness</span><span class="skill-dot"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-mark"></div><div class="divider-line"></div></div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="reveal">
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-diamond"></div>
+        <span class="ornament-text">Selected Work</span>
+      </div>
+      <p class="section-num">02</p>
+      <h2 class="section-heading">Projects &amp; <em>Initiatives</em></h2>
+    </div>
+
+    <div class="project-list">
+      <div class="project-item reveal">
+        <span class="project-num">01</span>
+        <div>
+          <h3 class="project-title">Platform 9¾ — Agentic AI Workspace</h3>
+          <p class="project-desc">Multi-agent Claude Code environment structured around the ICOR methodology. Named agents handle distinct execution layers across four parallel software products — an architecture that separates strategic coordination from product-level execution.</p>
+        </div>
+        <div class="project-meta">
+          <span class="project-tag">Claude Code</span>
+          <span class="project-tag">Agentic AI</span>
+          <span class="project-tag">Architecture</span>
+        </div>
+      </div>
+
+      <div class="project-item reveal reveal-delay-1">
+        <span class="project-num">02</span>
+        <div>
+          <h3 class="project-title">AI-Augmented GRC Workflows</h3>
+          <p class="project-desc">Designed prompt frameworks and AI-assisted processes for risk assessment, policy development, and compliance documentation — measurably reducing manual effort while maintaining rigorous standards.</p>
+        </div>
+        <div class="project-meta">
+          <span class="project-tag">GRC</span>
+          <span class="project-tag">Automation</span>
+          <span class="project-tag">Prompt Design</span>
+        </div>
+      </div>
+
+      <div class="project-item reveal reveal-delay-2">
+        <span class="project-num">03</span>
+        <div>
+          <h3 class="project-title">Rule Vault — AI Rules Intelligence App</h3>
+          <p class="project-desc">An LLM-powered application for on-demand parsing and retrieval of board game rules. A long-term IP play exploring document intelligence and natural language interfaces for complex structured content.</p>
+        </div>
+        <div class="project-meta">
+          <span class="project-tag">Product</span>
+          <span class="project-tag">LLM</span>
+          <span class="project-tag">Document AI</span>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-mark"></div><div class="divider-line"></div></div>
+
+  <!-- EXPERTISE -->
+  <section id="expertise">
+    <div class="reveal">
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-diamond"></div>
+        <span class="ornament-text">Expertise</span>
+      </div>
+      <p class="section-num">03</p>
+      <h2 class="section-heading">What I <em>Bring</em></h2>
+    </div>
+    <div class="expertise-grid reveal">
+      <div class="expertise-card">
+        <div class="expertise-num">I</div>
+        <h3 class="expertise-title">GRC & Security Programs</h3>
+        <p class="expertise-desc">End-to-end program design, framework alignment, policy development, and audit readiness. Built for organizations that need security to actually work.</p>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-num">II</div>
+        <h3 class="expertise-title">Agentic AI Systems</h3>
+        <p class="expertise-desc">Multi-agent workflow design using Claude Code and ICOR methodology. I build AI pipelines that are structured, intentional, and production-ready.</p>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-num">III</div>
+        <h3 class="expertise-title">Intelligent Workflow Design</h3>
+        <p class="expertise-desc">Translating complex operational processes into AI-augmented systems — faster execution, reduced error, better documentation at every layer.</p>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-num">IV</div>
+        <h3 class="expertise-title">AI Governance</h3>
+        <p class="expertise-desc">Policy frameworks, risk assessments, and controls designed for how AI actually behaves in production — not how we wish it did.</p>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-num">V</div>
+        <h3 class="expertise-title">Strategic Program Design</h3>
+        <p class="expertise-desc">Systems-level thinking applied to ambiguous problems. I build programs that are repeatable, measurable, and resilient under pressure.</p>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-num">VI</div>
+        <h3 class="expertise-title">Builder Mindset</h3>
+        <p class="expertise-desc">I don't just advise — I ship. From security frameworks to agentic pipelines to software products. Strategy is only as good as its execution.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-mark"></div><div class="divider-line"></div></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="reveal">
+        <div class="ornament" style="justify-content:center;">
+          <div class="ornament-line"></div>
+          <div class="ornament-diamond"></div>
+          <span class="ornament-text">Contact</span>
+          <div class="ornament-line right"></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <h2 class="contact-tagline">
+          Let's build something
+          <em>worth building.</em>
+        </h2>
+        <p class="contact-sub">Open to senior GRC, AI Security, and Security Program Management roles.</p>
+      </div>
+      <div class="contact-links reveal">
+        <a href="https://www.linkedin.com/in/avphillips" class="contact-link" target="_blank">LinkedIn</a>
+        <a href="https://github.com/avphillips11" class="contact-link" target="_blank">GitHub</a>
+        <a href="mailto:avphillips11@gmail.com" class="contact-link">Email</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Alyssa Phillips</p>
+    <div class="footer-diamond"></div>
+    <p>Built with intention.</p>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
