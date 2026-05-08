@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkyNOPE — Alyssa Phillips</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0c0814; --bg-mid: #130f1f; --surface: #1a1628;
+      --border: #2a2040; --border-dim: #1f1832;
+      --accent: #c8a96e; --accent-dim: #9e8054;
+      --lavender: #9b7fc7; --lavender-dim: #6d558f;
+      --text: #f0ebf5; --text-mid: #c8bfd8; --muted: #6e6480;
+      --font-display: 'Cormorant', serif; --font-body: 'Jost', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 15px; line-height: 1.75; overflow-x: hidden; }
+    body::after {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.5;
+    }
+    .glow { position: fixed; top: -20vh; left: 50%; transform: translateX(-50%); width: 80vw; height: 60vh; background: radial-gradient(ellipse at center, rgba(120,60,200,0.1) 0%, transparent 70%); pointer-events: none; z-index: 0; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 4rem; background: rgba(12,8,20,0.88); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-dim); }
+    .nav-logo { font-family: var(--font-display); font-size: 1.1rem; font-weight: 300; letter-spacing: 0.2em; color: var(--accent); text-decoration: none; }
+    .nav-back { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: var(--text-mid); }
+
+    /* HERO */
+    .cs-hero { position: relative; padding: 9rem 4rem 5rem; z-index: 1; max-width: 860px; }
+    .cs-label { font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.75rem; }
+    .cs-label::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--accent); }
+    .cs-title { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 6rem); font-weight: 300; line-height: 0.95; letter-spacing: 0.01em; margin-bottom: 1rem; }
+    .cs-title em { display: block; font-style: italic; color: var(--lavender); font-size: 0.7em; }
+    .cs-tagline { font-family: var(--font-display); font-size: clamp(1.1rem, 2vw, 1.5rem); font-style: italic; color: var(--text-mid); font-weight: 300; margin-bottom: 3rem; }
+
+    /* STATS BAR */
+    .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border-dim); margin: 0 4rem 0; position: relative; z-index: 1; }
+    .stat-cell { background: var(--bg); padding: 1.75rem 2rem; }
+    .stat-cell:hover { background: var(--bg-mid); }
+    .stat-n { font-family: var(--font-display); font-size: 2.5rem; font-weight: 300; color: var(--accent); line-height: 1; margin-bottom: 0.3rem; }
+    .stat-l { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+    /* DIVIDER */
+    .divider { display: flex; align-items: center; gap: 1.5rem; padding: 3rem 4rem; z-index: 1; position: relative; }
+    .divider-line { flex: 1; height: 1px; background: var(--border); }
+    .divider-mark { width: 6px; height: 6px; border: 1px solid var(--accent-dim); transform: rotate(45deg); }
+
+    /* BODY */
+    .cs-body { position: relative; z-index: 1; max-width: 860px; padding: 0 4rem 6rem; }
+    .cs-section { margin-bottom: 4rem; }
+    .cs-section-label { font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+    .cs-section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.5rem; }
+    .cs-section-title em { font-style: italic; color: var(--lavender); }
+    .cs-p { font-size: 0.88rem; font-weight: 300; color: var(--text-mid); line-height: 1.95; letter-spacing: 0.02em; margin-bottom: 1rem; }
+    .cs-p strong { color: var(--text); font-weight: 400; }
+
+    /* TEAM TABLE */
+    .cs-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+    .cs-table th { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+    .cs-table td { font-size: 0.82rem; font-weight: 300; color: var(--text-mid); padding: 0.85rem 1rem; border-bottom: 1px solid var(--border-dim); }
+    .cs-table td:first-child { color: var(--text); font-weight: 400; }
+    .cs-table tr:hover td { background: var(--bg-mid); }
+
+    /* DELIVERABLES GRID */
+    .deliverables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border-dim); margin: 1.5rem 0; }
+    .deliverable-card { background: var(--bg); padding: 1.5rem; transition: background 0.3s; }
+    .deliverable-card:hover { background: var(--bg-mid); }
+    .deliverable-cat { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--lavender-dim); margin-bottom: 0.75rem; }
+    .deliverable-list { list-style: none; }
+    .deliverable-list li { font-size: 0.78rem; font-weight: 300; color: var(--muted); padding: 0.3rem 0; border-bottom: 1px solid var(--border-dim); display: flex; gap: 0.5rem; }
+    .deliverable-list li::before { content: '—'; color: var(--border); flex-shrink: 0; }
+
+    /* PULL QUOTE */
+    .pull-quote { border-left: 2px solid var(--accent); padding: 1rem 2rem; margin: 2rem 0; }
+    .pull-quote p { font-family: var(--font-display); font-size: clamp(1.2rem, 2vw, 1.6rem); font-style: italic; font-weight: 300; color: var(--text); line-height: 1.5; }
+
+    /* PRINCIPLES */
+    .principles { display: flex; flex-direction: column; gap: 1px; background: var(--border-dim); margin: 1.5rem 0; }
+    .principle { background: var(--bg); padding: 1.5rem 2rem; display: grid; grid-template-columns: 3rem 1fr; gap: 1.5rem; transition: background 0.3s; }
+    .principle:hover { background: var(--bg-mid); }
+    .principle-num { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; color: var(--border); padding-top: 0.1rem; }
+    .principle-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; color: var(--text); margin-bottom: 0.4rem; }
+    .principle-body { font-size: 0.78rem; font-weight: 300; color: var(--muted); line-height: 1.8; }
+
+    /* BACK LINK */
+    .back-footer { position: relative; z-index: 1; border-top: 1px solid var(--border-dim); padding: 2.5rem 4rem; display: flex; justify-content: space-between; align-items: center; }
+    .back-footer p { font-size: 0.65rem; font-weight: 300; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; }
+    .back-link { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--lavender); text-decoration: none; border-bottom: 1px solid var(--lavender-dim); padding-bottom: 0.1rem; transition: all 0.25s; }
+    .back-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      nav, .cs-hero, .cs-body, .divider, .back-footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .stats-bar { grid-template-columns: 1fr 1fr; margin: 0 1.5rem; }
+      .deliverables-grid { grid-template-columns: 1fr; }
+      .cs-title { font-size: clamp(2.5rem, 8vw, 4rem); }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Alyssa Phillips</a>
+    <a href="index.html" class="nav-back">← Back to Portfolio</a>
+  </nav>
+
+  <div class="cs-hero reveal">
+    <p class="cs-label">Case Study — Enterprise Security Product</p>
+    <h1 class="cs-title">SkyNOPE <em>Endpoint AI Security Platform</em></h1>
+    <p class="cs-tagline">"Two witnesses, one console, neither can lie alone."</p>
+  </div>
+
+  <div class="stats-bar reveal">
+    <div class="stat-cell"><div class="stat-n">13</div><div class="stat-l">AI Team Members</div></div>
+    <div class="stat-cell"><div class="stat-n">22K+</div><div class="stat-l">Lines of Working Code</div></div>
+    <div class="stat-cell"><div class="stat-n">5</div><div class="stat-l">Compliance Frameworks</div></div>
+    <div class="stat-cell"><div class="stat-n">0</div><div class="stat-l">Lines Written by Hand</div></div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-mark"></div><div class="divider-line"></div></div>
+
+  <div class="cs-body">
+
+    <div class="cs-section reveal">
+      <p class="cs-section-label">The Problem</p>
+      <h2 class="cs-section-title">A gap the <em>security stack couldn't see</em></h2>
+      <p class="cs-p">AI coding assistants have become standard-issue on knowledge-worker endpoints. Tools like GitHub Copilot, Cursor, and Claude Code execute Bash commands, read sensitive files, call APIs, and chain tool calls, all running with the user's credentials. But the enterprise security stack was never designed to see any of it.</p>
+      <p class="cs-p"><strong>EDR sees the process tree.</strong> SIEM ingests log forwarding. CASB inspects browser TLS. None of them see the AI tool decision: the moment an AI assistant decides to pass an API token to a Bash command, read a file containing customer data, or call an unauthorized MCP server. This is a design-era gap, not a configuration gap.</p>
+      <p class="cs-p">I identified this gap from inside a managed detection and response environment, in our own environment, with our own approved AI tools. I decided to build the solution. The constraint: I am not a software engineer. I do not write Python. What I know is security, product thinking, and how to direct a team. So I built the team out of AI.</p>
+    </div>
+
+    <div class="cs-section reveal">
+      <p class="cs-section-label">The Approach</p>
+      <h2 class="cs-section-title">AI as <em>Workforce</em></h2>
+      <p class="cs-p">Rather than using Claude Code as a general-purpose assistant, I designed a structured workforce of 13 specialized AI team members, each with a detailed role profile, defined scope, working rules, and a growing archive of their own prior work that they review before every task. This is not prompt engineering. It is organizational design applied to AI.</p>
+
+      <table class="cs-table">
+        <thead><tr><th>Role</th><th>Name</th><th>Responsibilities</th></tr></thead>
+        <tbody>
+          <tr><td>Orchestrator</td><td>Dobby</td><td>Task routing and delegation — never executes work directly</td></tr>
+          <tr><td>Senior PM</td><td>Luna</td><td>Product vision, roadmap, specifications</td></tr>
+          <tr><td>Security Engineer</td><td>Draco</td><td>Threat models, detection logic, architecture</td></tr>
+          <tr><td>Solutions Architect</td><td>Cedric</td><td>Architecture diagrams, data flow visualization</td></tr>
+          <tr><td>UI/UX Designer</td><td>Ginny</td><td>Console design, HTML/CSS prototypes</td></tr>
+          <tr><td>Prototype Developer</td><td>Harry</td><td>Python/Flask backend and frontend</td></tr>
+          <tr><td>QA Engineer</td><td>Bellatrix</td><td>Bug analysis, code review, test planning</td></tr>
+          <tr><td>Product Security</td><td>Oliver</td><td>App security review, API hardening, signoff</td></tr>
+          <tr><td>UX Reviewer</td><td>Ron</td><td>Practitioner usability review</td></tr>
+          <tr><td>Researcher</td><td>Neville</td><td>Competitive analysis, deep research</td></tr>
+          <tr><td>Head of People</td><td>Hermione</td><td>Hiring workflow, onboarding, team profiles</td></tr>
+          <tr><td>Marketing</td><td>Lavender</td><td>Pitch deck, datasheets, buyer narrative</td></tr>
+          <tr><td>Buyer Persona</td><td>Tom</td><td>Procurement-side deck review and feedback</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cs-section reveal">
+      <p class="cs-section-label">The Product</p>
+      <h2 class="cs-section-title">What We <em>Built</em></h2>
+      <p class="cs-p">SkyNOPE fuses two independent endpoint witnesses: the customer's existing EDR (kernel-level) and Claude Code's lifecycle hooks (user-space, MDM-delivered), into one session timeline through a correlation engine. When the witnesses disagree, that disagreement is the security signal.</p>
+
+      <div class="pull-quote">
+        <p>"Two witnesses, one console, neither can lie alone."</p>
+      </div>
+
+      <p class="cs-p"><strong>SkyNOPE 1.0</strong> started as a single-witness file watcher: a Python agent reading Claude Code's session logs, feeding a Flask console. It proved the detection logic worked. But a single witness in user space meant an attacker who could tamper with the log files could blind the system entirely.</p>
+      <p class="cs-p"><strong>SkyNOPE 2.0</strong> replaced the single-witness model with a dual-witness architecture. My security engineer and researcher independently identified the same structural limitation, then disagreed on the solution (EDR-first vs. hooks-first). I ran a structured reconciliation: each read the other's work, steelmanned the opposing position, and wrote a revised recommendation. Result: convergence on a hybrid model. Most of the disagreement was definitional, not substantive.</p>
+    </div>
+
+    <div class="cs-section reveal">
+      <p class="cs-section-label">Deliverables</p>
+      <h2 class="cs-section-title">Everything produced through <em>AI orchestration</em></h2>
+      <div class="deliverables-grid">
+        <div class="deliverable-card">
+          <div class="deliverable-cat">Product</div>
+          <ul class="deliverable-list">
+            <li>Working Flask prototype (22,000+ lines across 3 files)</li>
+            <li>Full product specification (410+ lines, two revision cycles)</li>
+            <li>Product overview document (v3.6, seven revision cycles)</li>
+            <li>2.0 handoff brief (658 lines, zero-context cold-start)</li>
+          </ul>
+        </div>
+        <div class="deliverable-card">
+          <div class="deliverable-cat">Security</div>
+          <ul class="deliverable-list">
+            <li>OWASP Top 10 for Agentic Applications risk analysis</li>
+            <li>Threat models for 6 agentless architecture options</li>
+            <li>17-finding security review, all findings remediated</li>
+            <li>Pre-deploy security signoff for demo</li>
+          </ul>
+        </div>
+        <div class="deliverable-card">
+          <div class="deliverable-cat">Architecture & Design</div>
+          <ul class="deliverable-list">
+            <li>Dual-witness architecture specification</li>
+            <li>3 Mermaid architecture diagrams with deck-grade renders</li>
+            <li>AWS cloud-native migration plan (850 lines, cost estimates)</li>
+            <li>Full console UI specification (34 hours estimated build)</li>
+          </ul>
+        </div>
+        <div class="deliverable-card">
+          <div class="deliverable-cat">Go-to-Market & Process</div>
+          <ul class="deliverable-list">
+            <li>16-slide buyer pitch deck (HTML/CSS, browser-native)</li>
+            <li>Buyer persona validation, 3 review cycles, "ship" verdict</li>
+            <li>137-test QA plan with two-tier confidence scoring</li>
+            <li>10 standard operating procedures</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section reveal">
+      <p class="cs-section-label">Design Principles</p>
+      <h2 class="cs-section-title">Why the <em>model works</em></h2>
+      <div class="principles">
+        <div class="principle">
+          <div class="principle-num">I</div>
+          <div>
+            <div class="principle-title">Agents develop institutional memory</div>
+            <p class="principle-body">Every agent reads their own prior work folder before starting a new task. The security engineer's threat models reference earlier threat models. Patterns improve across sessions.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">II</div>
+          <div>
+            <div class="principle-title">Structured disagreement over consensus-seeking</div>
+            <p class="principle-body">When two agents disagreed on architecture, I didn't pick a winner. I spawned both again with instructions to steelman the opposing position. The result was genuine convergence, not false agreement.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">III</div>
+          <div>
+            <div class="principle-title">Honest scope as a design constraint</div>
+            <p class="principle-body">The buyer persona reviewed the pitch deck three times. Overclaims were removed. The honest-scope statement was praised in the final review as the most credible security pitch evaluated.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">IV</div>
+          <div>
+            <div class="principle-title">The AI executes under judgment — it doesn't replace it</div>
+            <p class="principle-body">I made the strategic decisions. The AI team produced everything else. The bottleneck in building a product is rarely the ability to write code. It's the ability to define what should be built and why it matters.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="back-footer">
+    <p>© 2026 Alyssa Phillips</p>
+    <a href="index.html" class="back-link">← Back to Portfolio</a>
+  </div>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); } });
+    }, { threshold: 0.06 });
+    reveals.forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
