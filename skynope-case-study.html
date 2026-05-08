@@ -136,7 +136,7 @@
       <h2 class="cs-section-title">A gap the <em>security stack couldn't see</em></h2>
       <p class="cs-p">AI coding assistants have become standard-issue on knowledge-worker endpoints. Tools like GitHub Copilot, Cursor, and Claude Code execute Bash commands, read sensitive files, call APIs, and chain tool calls, all running with the user's credentials. But the enterprise security stack was never designed to see any of it.</p>
       <p class="cs-p"><strong>EDR sees the process tree.</strong> SIEM ingests log forwarding. CASB inspects browser TLS. None of them see the AI tool decision: the moment an AI assistant decides to pass an API token to a Bash command, read a file containing customer data, or call an unauthorized MCP server. This is a design-era gap, not a configuration gap.</p>
-      <p class="cs-p">I identified this gap from inside a managed detection and response environment, in our own environment, with our own approved AI tools. I decided to build the solution. The constraint: I am not a software engineer. I do not write Python. What I know is security, product thinking, and how to direct a team. So I built the team out of AI.</p>
+      <p class="cs-p">I identified this gap from inside a managed detection and response environment, using our own approved AI tools. I decided to build the solution. The constraint: I am not a software engineer. I do not write Python. What I know is security, product thinking, and how to direct a team. So I built the team out of AI.</p>
     </div>
 
     <div class="cs-section reveal">
@@ -147,7 +147,7 @@
       <table class="cs-table">
         <thead><tr><th>Role</th><th>Name</th><th>Responsibilities</th></tr></thead>
         <tbody>
-          <tr><td>Orchestrator</td><td>Dobby</td><td>Task routing and delegation — never executes work directly</td></tr>
+          <tr><td>Orchestrator</td><td>Dobby</td><td>Task routing and delegation; never executes work directly</td></tr>
           <tr><td>Senior PM</td><td>Luna</td><td>Product vision, roadmap, specifications</td></tr>
           <tr><td>Security Engineer</td><td>Draco</td><td>Threat models, detection logic, architecture</td></tr>
           <tr><td>Solutions Architect</td><td>Cedric</td><td>Architecture diagrams, data flow visualization</td></tr>
@@ -248,7 +248,7 @@
         <div class="principle">
           <div class="principle-num">IV</div>
           <div>
-            <div class="principle-title">The AI executes under judgment — it doesn't replace it</div>
+            <div class="principle-title">The AI executes under judgment. It doesn't replace it.</div>
             <p class="principle-body">I made the strategic decisions. The AI team produced everything else. The bottleneck in building a product is rarely the ability to write code. It's the ability to define what should be built and why it matters.</p>
           </div>
         </div>
