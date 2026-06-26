@@ -115,10 +115,10 @@
   </div>
 
   <div class="stats-bar reveal">
-    <div class="stat-cell"><div class="stat-n">12</div><div class="stat-l">AI Specialists Built</div></div>
-    <div class="stat-cell"><div class="stat-n">59</div><div class="stat-l">Unified Controls Mapped</div></div>
-    <div class="stat-cell"><div class="stat-n">5</div><div class="stat-l">Frameworks Aligned</div></div>
-    <div class="stat-cell"><div class="stat-n">3wks</div><div class="stat-l">Start to Current State</div></div>
+    <div class="stat-cell"><div class="stat-n">13</div><div class="stat-l">AI Specialists Built</div></div>
+    <div class="stat-cell"><div class="stat-n">17.6x</div><div class="stat-l">Productivity Multiplier</div></div>
+    <div class="stat-cell"><div class="stat-n">7</div><div class="stat-l">Frameworks Covered</div></div>
+    <div class="stat-cell"><div class="stat-n">500+</div><div class="stat-l">Hours Saved</div></div>
   </div>
 
   <div class="divider"><div class="divider-line"></div><div class="divider-mark"></div><div class="divider-line"></div></div>
@@ -128,7 +128,7 @@
     <div class="cs-section reveal">
       <p class="cs-section-label">The Problem</p>
       <h2 class="cs-section-title">One person. <em>An entire program.</em></h2>
-      <p class="cs-p">As the primary owner of a full GRC and Privacy program at a ~400-person cybersecurity company, the scope is substantial: SOC 2 Type II, ISO 27001/27701, PCI DSS, NIST 800-171, GDPR, AI governance, third-party risk management, privacy operations, and a multi-workstream risk program revamp, with a team of two.</p>
+      <p class="cs-p">As the primary owner of a full GRC and Privacy program at a leading cybersecurity company, the scope is substantial: SOC 2 Type II, ISO 27001/27701, PCI DSS, NIST 800-171, GDPR, EU AI Act, ISO 42001, third-party risk management, privacy operations, and a multi-workstream risk program revamp, with a team of two.</p>
       <p class="cs-p">Multiple audits run simultaneously. Frameworks overlap but don't align cleanly. Evidence collection is manual. Stakeholder reporting requires assembling data from a half-dozen systems. Strategic initiatives (the ones that actually mature the program) compete for time with daily operational load.</p>
       <div class="pull-quote">
         <p>I needed a way to scale capacity without scaling headcount.</p>
@@ -138,24 +138,25 @@
     <div class="cs-section reveal">
       <p class="cs-section-label">The Approach</p>
       <h2 class="cs-section-title">A structured <em>AI team</em></h2>
-      <p class="cs-p">In April 2026, I built Project TOG, a structured AI team workspace running inside Claude Code. Rather than using AI as a generic assistant, I designed a team of 12 distinct specialists, each with a defined role, domain expertise, and persona. I direct work to them by name, the same way I'd delegate to human colleagues.</p>
+      <p class="cs-p">In April 2026, I built Project TOG, a structured AI team workspace running inside Claude Code. Rather than using AI as a generic assistant, I designed a team of 13 distinct specialists, each with a defined role, model assignment, and domain expertise. I direct work to them by name, the same way I'd delegate to human colleagues. A model tiering strategy matches AI capability to role complexity, cutting costs by ~51% versus an all-Opus deployment.</p>
       <p class="cs-p">The core design principle: <strong>the AI orchestrator never does work directly.</strong> All tasks are routed to the right specialist. If no specialist exists, a hire pipeline triggers: a research agent investigates what the role should look like, an HR agent designs the persona and onboards them, and then the work begins.</p>
 
       <table class="cs-table">
-        <thead><tr><th>Name</th><th>Role</th><th>Domain</th></tr></thead>
+        <thead><tr><th>Name</th><th>Role</th><th>Model</th><th>Domain</th></tr></thead>
         <tbody>
-          <tr><td>Aelin</td><td>Orchestrator</td><td>Routes all work; never executes directly</td></tr>
-          <tr><td>Rowan</td><td>Senior Researcher</td><td>Deep-dive research for hiring and strategic questions</td></tr>
-          <tr><td>Lysandra</td><td>Head of People</td><td>Designs and onboards new AI team members</td></tr>
-          <tr><td>Chaol</td><td>IT & Security Risk SME</td><td>Risk program revamp, FAIR methodology, KRIs</td></tr>
-          <tr><td>Dorian</td><td>Compliance Frameworks Expert</td><td>SOC 2, ISO 27001/27701, PCI DSS, NIST 800-171</td></tr>
-          <tr><td>Elide</td><td>Privacy Program Expert</td><td>GDPR, DPF, DSARs, ROPA, Privacy by Design</td></tr>
-          <tr><td>Fenrys</td><td>Business Systems Engineer</td><td>API integrations, system architecture, MCP</td></tr>
-          <tr><td>Manon</td><td>UI/UX Designer</td><td>AI product interfaces, HTML/CSS prototyping</td></tr>
-          <tr><td>Yrene</td><td>UX Researcher</td><td>GRC practitioner lens on product design</td></tr>
-          <tr><td>Aedian</td><td>Chief of Staff</td><td>Session management, operations, commitment tracking</td></tr>
-          <tr><td>Nehemia</td><td>Full-Stack Engineer</td><td>Application development, React, full-stack builds</td></tr>
-          <tr><td>Gavriel</td><td>AI Governance Strategist</td><td>AI governance program design, regulatory landscape</td></tr>
+          <tr><td>Aelin</td><td>Orchestrator</td><td>Opus</td><td>Delegation, routing, context management</td></tr>
+          <tr><td>Aedian</td><td>Chief of Staff</td><td>Sonnet</td><td>Session management, standup, closeout</td></tr>
+          <tr><td>Gavriel</td><td>AI Governance Strategist</td><td>Fable</td><td>EU AI Act, ISO 42001, GPAI analysis</td></tr>
+          <tr><td>Chaol</td><td>Risk Strategist</td><td>Opus</td><td>Risk appetite, risk program design, threat modeling</td></tr>
+          <tr><td>Elide</td><td>Privacy Strategist</td><td>Sonnet</td><td>GDPR, ROPA, DPIAs, privacy program</td></tr>
+          <tr><td>Dorian</td><td>Compliance Strategist</td><td>Opus</td><td>Framework mapping, PCI, NIST, audit findings</td></tr>
+          <tr><td>Fenrys</td><td>Business Systems Analyst</td><td>Sonnet</td><td>Jira automation, MCP integrations, KPI dashboards</td></tr>
+          <tr><td>Rowan</td><td>Research Analyst</td><td>Fable</td><td>Deep research, benchmarking, tool evaluation</td></tr>
+          <tr><td>Emrys</td><td>Instructional Designer</td><td>Sonnet</td><td>AI literacy training, video production</td></tr>
+          <tr><td>Lysandra</td><td>Head of People</td><td>Sonnet</td><td>Hiring workflow, onboarding, team profiles</td></tr>
+          <tr><td>Manon</td><td>UI/UX Designer</td><td>Sonnet</td><td>AI product interfaces, HTML/CSS prototyping</td></tr>
+          <tr><td>Nehemia</td><td>Full-Stack Engineer</td><td>Sonnet</td><td>Application development, React, full-stack builds</td></tr>
+          <tr><td>Yrene</td><td>UX Researcher</td><td>Sonnet</td><td>GRC practitioner lens on product design</td></tr>
         </tbody>
       </table>
     </div>
@@ -167,8 +168,8 @@
         <div class="deliverable-card">
           <div class="deliverable-cat">Unified Controls Library</div>
           <ul class="deliverable-list">
-            <li>59 unified control rows across 5 frameworks</li>
-            <li>ISO 27001:2022, ISO 27701, GDPR, NIST 800-171, SOC 2</li>
+            <li>59 unified control rows across 7 frameworks</li>
+            <li>ISO 27001:2022, ISO 27701, GDPR, NIST 800-171, SOC 2, EU AI Act, ISO 42001</li>
             <li>Citation-level accuracy, audited against actual standard text</li>
             <li>3 iterative versions with error correction at each pass</li>
           </ul>
@@ -183,12 +184,30 @@
           </ul>
         </div>
         <div class="deliverable-card">
+          <div class="deliverable-cat">EU AI Act & ISO 42001 Compliance</div>
+          <ul class="deliverable-list">
+            <li>16 AI systems inventoried with full compliance metadata</li>
+            <li>GPAI exclusion determinations, Article 5/6 risk classifications</li>
+            <li>AI Literacy Competency Framework (4 tiers, Article 4)</li>
+            <li>AI inventory reduced from ~80 hours manual to ~4 hours</li>
+          </ul>
+        </div>
+        <div class="deliverable-card">
+          <div class="deliverable-cat">Process Automation</div>
+          <ul class="deliverable-list">
+            <li>7 automated skills (standup, closeout, risk intake, audit findings, KPI refresh, AI inventory, hiring)</li>
+            <li>5 MCP integrations (Jira, Confluence, Slack, Vanta, Zoom)</li>
+            <li>End-to-end risk intake: Slack form to scored Jira ticket in minutes</li>
+            <li>Automated weekly KPI dashboard for leadership</li>
+          </ul>
+        </div>
+        <div class="deliverable-card">
           <div class="deliverable-cat">AI Governance Strategy</div>
           <ul class="deliverable-list">
             <li>14-section strategy built from full audit of existing artifacts</li>
             <li>Regulatory landscape analysis (EU AI Act, NIST AI RMF, ISO 42001)</li>
             <li>Phased maturity roadmap with measurable milestones</li>
-            <li>Slack bot specification for employee-facing governance guidance</li>
+            <li>Company-wide AI enablement for 400+ employees</li>
           </ul>
         </div>
         <div class="deliverable-card">
@@ -210,21 +229,23 @@
         <div class="ba-card">
           <div class="ba-label before">Before Project TOG</div>
           <ul class="ba-list">
+            <li>AI inventory: ~80 hours of manual research, cross-referencing, and documentation</li>
             <li>Controls mapping: manual spreadsheet exercise taking days per framework alignment</li>
             <li>Risk program planning: months of solo analysis with no capacity for strategic work</li>
-            <li>AI governance: scattered documents across Confluence with gaps invisible until audit</li>
-            <li>Operational visibility: 4 to 5 tools checked daily to assemble program status</li>
-            <li>Audit prep: evidence assembled manually, framework by framework</li>
+            <li>AI governance: scattered documents with gaps invisible until audit</li>
+            <li>Weekly reporting: 2-3 hours assembling data from multiple systems by hand</li>
+            <li>Risk ticket creation: ~45 minutes per ticket for scoring, controls mapping, and treatment plans</li>
           </ul>
         </div>
         <div class="ba-card">
           <div class="ba-label after">After Project TOG</div>
           <ul class="ba-list after">
-            <li>Controls mapping: unified library with citation-level accuracy across 5 frameworks. Hours, not days.</li>
+            <li>AI inventory: ~4 hours. 16 systems inventoried, classified, and published in a single session</li>
+            <li>Controls mapping: unified library with citation-level accuracy across 7 frameworks. Hours, not days.</li>
             <li>Risk program: full current-state assessment and 8-workstream plan from real data</li>
-            <li>AI governance: comprehensive strategy with phased roadmap and governance structures</li>
-            <li>Operational visibility: live Command Center surfacing Jira, Slack, Confluence in one view</li>
-            <li>Audit prep: controls mapped once, evidence applies everywhere</li>
+            <li>AI governance: full EU AI Act + ISO 42001 compliance program built from zero. 0 audit findings.</li>
+            <li>Weekly reporting: automated KPI dashboard refreshes every Thursday. Zero manual effort.</li>
+            <li>Risk ticket creation: ~5 minutes. Automated scoring, controls mapping, and treatment plans.</li>
           </ul>
         </div>
       </div>
@@ -233,8 +254,9 @@
     <div class="cs-section reveal">
       <p class="cs-section-label">Methodology</p>
       <h2 class="cs-section-title">Why this <em>works</em></h2>
-      <p class="cs-p"><strong>Specialization over generality.</strong> A generic AI assistant produces generic outputs. By giving each team member a specific domain: risk, compliance, privacy, engineering, the outputs are calibrated to the right level of depth and use the right vocabulary. Dorian doesn't explain what SOC 2 is. Chaol doesn't define FAIR. They work at the level a senior practitioner expects.</p>
-      <p class="cs-p"><strong>Live data, not stale descriptions.</strong> By connecting to production systems via MCP (Jira, Confluence, Slack), the AI team works from real data, not a summary provided from memory. When Chaol assessed the risk program, he read the actual risk register and the actual Management Meeting minutes.</p>
+      <p class="cs-p"><strong>Specialization over generality.</strong> A generic AI assistant produces generic outputs. By giving each team member a specific domain, model assignment, and working context, the outputs are calibrated to the right level of depth and use the right vocabulary. Dorian doesn't explain what SOC 2 is. Chaol doesn't define FAIR. Gavriel doesn't summarize the EU AI Act at a beginner level. They work at the level a senior practitioner expects.</p>
+      <p class="cs-p"><strong>Model tiering as cost discipline.</strong> Fable for deep analytical reasoning (governance, research). Opus for complex multi-step work (risk, compliance). Sonnet for structured execution. The result: ~51% cost reduction versus an all-Opus deployment, with no drop in output quality.</p>
+      <p class="cs-p"><strong>Live data, not stale descriptions.</strong> By connecting to production systems via MCP (Jira, Confluence, Slack, Vanta, Zoom), the AI team works from real data, not a summary provided from memory. When Chaol assessed the risk program, he read the actual risk register. When Fenrys built the KPI dashboard, he queried 9 live Jira data sources.</p>
       <p class="cs-p"><strong>Human-in-the-loop by design.</strong> Every deliverable lands in a Review folder. Nothing is "done" until reviewed. The system is designed for AI-assisted work, not AI-autonomous work. I am the program manager; the AI team extends my capacity, not my authority.</p>
     </div>
 
