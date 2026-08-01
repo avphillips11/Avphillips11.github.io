@@ -1,6 +1,6 @@
 # avphillips11.github.io
 
-Personal portfolio site for Alyssa Phillips — Senior GRC & Privacy Analyst and AI Governance practitioner.
+Personal portfolio site for Alyssa Phillips, Principal Program Manager for GRC & AI Governance.
 
 Live at [avphillips11.github.io](https://avphillips11.github.io)
 
