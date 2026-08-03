@@ -1,6 +1,6 @@
 # avphillips11.github.io
 
-Personal portfolio site for Alyssa Phillips, Principal Program Manager for GRC & AI Governance.
+Portfolio of Alyssa Phillips. Agentic AI systems, AI governance, and security programs.
 
 Live at [avphillips11.github.io](https://avphillips11.github.io)
 
