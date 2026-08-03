@@ -635,6 +635,12 @@
       nav { padding: 1.5rem 2rem; }
       nav.scrolled { padding: 1rem 2rem; }
     }
+
+    @media (max-width: 640px) {
+      nav { flex-wrap: wrap; row-gap: 0.6rem; }
+      .nav-links { width: 100%; justify-content: space-between; gap: 0.3rem; }
+      .nav-links a { font-size: 0.6rem; letter-spacing: 0.1em; white-space: nowrap; }
+    }
   </style>
 </head>
 <body>
