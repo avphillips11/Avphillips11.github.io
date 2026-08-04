@@ -156,7 +156,7 @@
     <div class="cs-section reveal">
       <p class="cs-section-label">The Approach</p>
       <h2 class="cs-section-title">A structured <em>AI team</em></h2>
-      <p class="cs-p">In April 2026, I built Project TOG, a structured AI team workspace running inside Claude Code. Rather than using AI as a generic assistant, I designed a team of 13 distinct specialists, each with a defined role, model assignment, and domain expertise. I direct work to them by name, the same way I'd delegate to human colleagues. A model tiering strategy matches AI capability to role complexity, cutting costs by ~51% versus an all-Opus deployment.</p>
+      <p class="cs-p">In April 2026, I built Project TOG, a structured AI team workspace running inside Claude Code. Rather than using AI as a generic assistant, I designed a team of 13 distinct specialists, each with a defined role, model assignment, and domain expertise. I direct work to them by name, the same way I'd delegate to human colleagues. A model tiering strategy matches AI capability to role complexity, cutting costs by ~23% versus an all-Opus deployment.</p>
       <p class="cs-p">The core design principle: <strong>the AI orchestrator never does work directly.</strong> All tasks are routed to the right specialist. If no specialist exists, a hire pipeline triggers: a research agent investigates what the role should look like, an HR agent designs the persona and onboards them, and then the work begins.</p>
 
       <table class="cs-table">
@@ -273,7 +273,7 @@
       <p class="cs-section-label">Methodology</p>
       <h2 class="cs-section-title">Why this <em>works</em></h2>
       <p class="cs-p"><strong>Specialization over generality.</strong> A generic AI assistant produces generic outputs. By giving each team member a specific domain, model assignment, and working context, the outputs are calibrated to the right level of depth and use the right vocabulary. Dorian doesn't explain what SOC 2 is. Chaol doesn't define FAIR. Gavriel doesn't summarize the EU AI Act at a beginner level. They work at the level a senior practitioner expects.</p>
-      <p class="cs-p"><strong>Model tiering as cost discipline.</strong> Fable for deep analytical reasoning (governance, research). Opus for complex multi-step work (risk, compliance). Sonnet for structured execution. The result: ~51% cost reduction versus an all-Opus deployment, with no drop in output quality.</p>
+      <p class="cs-p"><strong>Model tiering as cost discipline.</strong> Fable for deep analytical reasoning (governance, research). Opus for complex multi-step work (risk, compliance). Sonnet for structured execution. The result: ~23% cost reduction versus an all-Opus deployment, with no drop in output quality.</p>
       <p class="cs-p"><strong>Live data, not stale descriptions.</strong> By connecting to production systems via MCP (Jira, Confluence, Slack, Vanta, Zoom), the AI team works from real data, not a summary provided from memory. When Chaol assessed the risk program, he read the actual risk register. When Fenrys built the KPI dashboard, he queried 9 live Jira data sources.</p>
       <p class="cs-p"><strong>Human-in-the-loop by design.</strong> Every deliverable lands in a Review folder. Nothing is "done" until reviewed. The system is designed for AI-assisted work, not AI-autonomous work. I am the program manager; the AI team extends my capacity, not my authority.</p>
     </div>
