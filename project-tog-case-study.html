@@ -68,6 +68,9 @@
     .cs-table td { font-size: 0.82rem; font-weight: 300; color: var(--text-mid); padding: 0.85rem 1rem; border-bottom: 1px solid var(--border-dim); }
     .cs-table td:first-child { color: var(--text); font-weight: 400; }
     .cs-table tr:hover td { background: var(--bg-mid); }
+    /* Deep link target from how-i-use-ai.html; clears the fixed nav, which is
+       taller on narrow phones where it stacks. Affects scrolling only. */
+    #ai-team { scroll-margin-top: 8rem; }
 
     .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border-dim); margin: 1.5rem 0; }
     .ba-card { background: var(--bg); padding: 2rem; }
@@ -159,7 +162,7 @@
       <p class="cs-p">In April 2026, I built Project TOG, a structured AI team workspace running inside Claude Code. Rather than using AI as a generic assistant, I designed a team of 15 distinct specialists, each with a defined role, model assignment, and domain expertise. I direct work to them by name, the same way I'd delegate to human colleagues. A model tiering strategy matches AI capability to role complexity, cutting costs by ~23% versus an all-Opus deployment.</p>
       <p class="cs-p">The core design principle: <strong>the AI orchestrator never does work directly.</strong> All tasks are routed to the right specialist. If no specialist exists, a hire pipeline triggers: a research agent investigates what the role should look like, an HR agent designs the persona and onboards them, and then the work begins.</p>
 
-      <table class="cs-table">
+      <table class="cs-table" id="ai-team">
         <thead><tr><th>Name</th><th>Role</th><th>Model</th><th>Domain</th></tr></thead>
         <tbody>
           <tr><td>Aelin</td><td>Orchestrator</td><td>Opus</td><td>Delegation, routing, context management</td></tr>
