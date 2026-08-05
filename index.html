@@ -631,7 +631,6 @@
       nav, section, footer { padding-left: 2rem; padding-right: 2rem; }
       .divider { padding: 0 2rem; }
       .hero { padding: 7rem 2rem 5rem; }
-      .hero-name { font-size: min(clamp(4.5rem, 10vw, 10rem), calc((100vw - 5rem) / 6.25)); }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       .about-divider { display: none; }
       .expertise-grid { grid-template-columns: 1fr; }
@@ -650,11 +649,11 @@
       .nav-links a { font-size: 0.6rem; letter-spacing: 0.1em; white-space: nowrap; }
     }
 
-    /* Below the width where the eyebrow fits on one line, drop the separator
-       and stack the two halves, so no line starts or ends on a middot.
-       32.125em is the measured breakpoint (514px at a 16px base font); in em
+    /* Below the width where the eyebrow fits on one line, drop the separators
+       and stack the three parts, so no line starts or ends on a middot.
+       41.125em is the measured breakpoint (658px at a 16px base font); in em
        rather than px so it tracks the same root font-size the eyebrow does. */
-    @media (max-width: 32.125em) {
+    @media (max-width: 41.125em) {
       .hero-eyebrow .eyebrow-sep { display: none; }
       .hero-eyebrow .eyebrow-part { display: block; }
     }
@@ -680,8 +679,8 @@
   <!-- HERO -->
   <div class="hero">
     <div class="hero-inner">
-      <p class="hero-eyebrow"><span class="eyebrow-part">Principal Program Manager</span><span class="eyebrow-sep"> · </span><span class="eyebrow-part">GRC &amp; AI Governance</span></p>
-      <h1 class="hero-name">Alyssa Phillips,&nbsp;AIGP</h1>
+      <p class="hero-eyebrow"><span class="eyebrow-part">Principal Program Manager</span><span class="eyebrow-sep"> · </span><span class="eyebrow-part">GRC &amp; AI Governance</span><span class="eyebrow-sep"> · </span><span class="eyebrow-part">Certified AIGP</span></p>
+      <h1 class="hero-name">Alyssa Phillips</h1>
       <p class="hero-subtitle">Where rigor meets intelligence.</p>
       <div class="hero-rule"></div>
       <p class="hero-desc">
