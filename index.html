@@ -649,6 +649,15 @@
       .nav-links { width: 100%; justify-content: space-between; gap: 0.3rem; }
       .nav-links a { font-size: 0.6rem; letter-spacing: 0.1em; white-space: nowrap; }
     }
+
+    /* Below the width where the eyebrow fits on one line, drop the separator
+       and stack the two halves, so no line starts or ends on a middot.
+       32.125em is the measured breakpoint (514px at a 16px base font); in em
+       rather than px so it tracks the same root font-size the eyebrow does. */
+    @media (max-width: 32.125em) {
+      .hero-eyebrow .eyebrow-sep { display: none; }
+      .hero-eyebrow .eyebrow-part { display: block; }
+    }
   </style>
 </head>
 <body>
@@ -671,7 +680,7 @@
   <!-- HERO -->
   <div class="hero">
     <div class="hero-inner">
-      <p class="hero-eyebrow">Principal Program Manager · GRC &amp; AI Governance</p>
+      <p class="hero-eyebrow"><span class="eyebrow-part">Principal Program Manager</span><span class="eyebrow-sep"> · </span><span class="eyebrow-part">GRC &amp; AI Governance</span></p>
       <h1 class="hero-name">Alyssa Phillips,&nbsp;AIGP</h1>
       <p class="hero-subtitle">Where rigor meets intelligence.</p>
       <div class="hero-rule"></div>
