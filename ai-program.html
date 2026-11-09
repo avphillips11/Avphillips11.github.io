@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enterprise AI Program — Alyssa Phillips</title>
+  <meta name="description" content="Three months running an enterprise AI program: a real baseline, defaults instead of rules, visibility people can use, and policy that matches how people work." />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Alyssa Phillips" />
+  <meta property="og:url" content="https://avphillips11.github.io/ai-program.html" />
+  <meta property="og:title" content="Running an Enterprise AI Program with an AI Team" />
+  <meta property="og:description" content="Three months running an enterprise AI program: a real baseline, defaults instead of rules, visibility people can use, and policy that matches how people work." />
+  <meta name="twitter:card" content="summary" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0c0814; --bg-mid: #130f1f; --surface: #1a1628;
+      --border: #2a2040; --border-dim: #1f1832;
+      --accent: #c8a96e; --accent-dim: #9e8054;
+      --lavender: #9b7fc7; --lavender-dim: #6d558f;
+      --text: #f0ebf5; --text-mid: #c8bfd8; --muted: #6e6480;
+      --font-display: 'Cormorant', serif; --font-body: 'Jost', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 15px; line-height: 1.75; overflow-x: hidden; }
+    body::after {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.5;
+    }
+    .glow { position: fixed; top: -20vh; left: 50%; transform: translateX(-50%); width: 80vw; height: 60vh; background: radial-gradient(ellipse at center, rgba(120,60,200,0.1) 0%, transparent 70%); pointer-events: none; z-index: 0; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 4rem; background: rgba(12,8,20,0.88); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-dim); }
+    .nav-logo { font-family: var(--font-display); font-size: 1.1rem; font-weight: 300; letter-spacing: 0.2em; color: var(--accent); text-decoration: none; }
+    .nav-back { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: var(--text-mid); }
+
+    /* HERO */
+    .cs-hero { position: relative; padding: 9rem 4rem 5rem; z-index: 1; max-width: 860px; }
+    .cs-label { font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.75rem; }
+    .cs-label::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--accent); }
+    .cs-title { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 6rem); font-weight: 300; line-height: 0.95; letter-spacing: 0.01em; margin-bottom: 1rem; }
+    .cs-title em { display: block; font-style: italic; color: var(--lavender); font-size: 0.65em; }
+    .cs-tagline { font-family: var(--font-display); font-size: clamp(1.1rem, 2vw, 1.5rem); font-style: italic; color: var(--text-mid); font-weight: 300; margin-bottom: 3rem; }
+
+    /* STATS BAR */
+    .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border-dim); margin: 0 4rem; position: relative; z-index: 1; }
+    .stat-cell { background: var(--bg); padding: 1.75rem 2rem; transition: background 0.3s; }
+    .stat-cell:hover { background: var(--bg-mid); }
+    .stat-n { font-family: var(--font-display); font-size: 2.5rem; font-weight: 300; color: var(--accent); line-height: 1; margin-bottom: 0.3rem; }
+    .stat-l { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+    /* DIVIDER */
+    .divider { display: flex; align-items: center; gap: 1.5rem; padding: 3rem 4rem; z-index: 1; position: relative; }
+    .divider-line { flex: 1; height: 1px; background: var(--border); }
+    .divider-mark { width: 6px; height: 6px; border: 1px solid var(--accent-dim); transform: rotate(45deg); }
+
+    /* BODY */
+    .cs-body { position: relative; z-index: 1; max-width: 860px; padding: 0 4rem 6rem; }
+    .cs-section { margin-bottom: 4rem; }
+    .cs-section-label { font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+    .cs-section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.5rem; }
+    .cs-section-title em { font-style: italic; color: var(--lavender); }
+    .cs-p { font-size: 0.88rem; font-weight: 300; color: var(--text-mid); line-height: 1.95; letter-spacing: 0.02em; margin-bottom: 1rem; }
+    .cs-p strong { color: var(--text); font-weight: 400; }
+    .cs-p a { color: var(--lavender); text-decoration: none; border-bottom: 1px solid var(--lavender-dim); transition: all 0.25s; }
+    .cs-p a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* TABLE */
+    .cs-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+    .cs-table th { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+    .cs-table td { font-size: 0.82rem; font-weight: 300; color: var(--text-mid); padding: 0.85rem 1rem; border-bottom: 1px solid var(--border-dim); }
+    .cs-table td:first-child { color: var(--text); font-weight: 400; }
+    .cs-table tr:hover td { background: var(--bg-mid); }
+
+    /* DELIVERABLES GRID */
+    .deliverables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border-dim); margin: 1.5rem 0; }
+    .deliverable-card { background: var(--bg); padding: 1.5rem; transition: background 0.3s; }
+    .deliverable-card:hover { background: var(--bg-mid); }
+    .deliverable-cat { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--lavender-dim); margin-bottom: 0.75rem; }
+    .deliverable-list { list-style: none; }
+    .deliverable-list li { font-size: 0.78rem; font-weight: 300; color: var(--muted); padding: 0.3rem 0; border-bottom: 1px solid var(--border-dim); display: flex; gap: 0.5rem; }
+    .deliverable-list li::before { content: '—'; color: var(--border); flex-shrink: 0; }
+
+    /* PULL QUOTE */
+    .pull-quote { border-left: 2px solid var(--accent); padding: 1rem 2rem; margin: 2rem 0; }
+    .pull-quote p { font-family: var(--font-display); font-size: clamp(1.2rem, 2vw, 1.6rem); font-style: italic; font-weight: 300; color: var(--text); line-height: 1.5; }
+
+    /* PRINCIPLES */
+    .principles { display: flex; flex-direction: column; gap: 1px; background: var(--border-dim); margin: 1.5rem 0; }
+    .principle { background: var(--bg); padding: 1.5rem 2rem; display: grid; grid-template-columns: 3rem 1fr; gap: 1.5rem; transition: background 0.3s; }
+    .principle:hover { background: var(--bg-mid); }
+    .principle-num { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; color: var(--border); padding-top: 0.1rem; }
+    .principle-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; color: var(--text); margin-bottom: 0.4rem; }
+    .principle-body { font-size: 0.78rem; font-weight: 300; color: var(--muted); line-height: 1.8; }
+
+    /* METRICS GRID */
+    .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border-dim); margin: 1.5rem 0; }
+    .metric-cell { background: var(--bg); padding: 1.75rem 2rem; transition: background 0.3s; }
+    .metric-cell:hover { background: var(--bg-mid); }
+    .metric-n { font-family: var(--font-display); font-size: 2rem; font-weight: 300; color: var(--accent); line-height: 1; margin-bottom: 0.3rem; }
+    .metric-l { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+    /* BACK LINK */
+    .back-footer { position: relative; z-index: 1; border-top: 1px solid var(--border-dim); padding: 2.5rem 4rem; display: flex; justify-content: space-between; align-items: center; }
+    .back-footer p { font-size: 0.65rem; font-weight: 300; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; }
+    .back-link { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--lavender); text-decoration: none; border-bottom: 1px solid var(--lavender-dim); padding-bottom: 0.1rem; transition: all 0.25s; }
+    .back-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      nav, .cs-hero, .cs-body, .divider, .back-footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .stats-bar { grid-template-columns: 1fr 1fr; margin: 0 1.5rem; }
+      .deliverables-grid { grid-template-columns: 1fr; }
+      .metrics-grid { grid-template-columns: 1fr; }
+      .cs-title { font-size: clamp(2.5rem, 8vw, 4rem); }
+    }
+
+    @media (max-width: 430px) {
+      .cs-table th { padding: 0.6rem 0.4rem; font-size: 0.56rem; letter-spacing: 0.1em; }
+      .cs-table td { padding: 0.6rem 0.4rem; font-size: 0.72rem; }
+    }
+
+    @media (max-width: 400px) {
+      .stat-cell { padding-left: 1rem; padding-right: 1rem; }
+      nav { flex-wrap: wrap; row-gap: 0.5rem; }
+      .nav-logo { white-space: nowrap; }
+      .nav-back { width: 100%; white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Alyssa Phillips</a>
+    <a href="index.html" class="nav-back">&larr; Back to Portfolio</a>
+  </nav>
+
+  <div class="cs-hero reveal">
+    <p class="cs-label">Case Study — Enterprise AI Program</p>
+    <h1 class="cs-title">Running an enterprise AI program <em>with an AI team</em></h1>
+    <p class="cs-tagline">Principal Program Manager, GRC &amp; AI Governance</p>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-mark"></div><div class="divider-line"></div></div>
+
+  <div class="cs-body">
+
+    <div class="cs-section reveal">
+      <p class="cs-p">In August I was promoted into a role that made AI governance part of my job instead of a side project. Leadership was already asking a fair question: what is all this AI actually costing us, and is it worth it?</p>
+      <p class="cs-p">This is what I built in the three months after that, mostly with the same AI team I'd already built for my GRC work.</p>
+    </div>
+
+    <!-- SECTION 1: THE PROBLEM -->
+    <div class="cs-section reveal">
+      <p class="cs-section-label">Section I</p>
+      <h2 class="cs-section-title">The <em>Problem</em></h2>
+      <p class="cs-p">Claude had gone from a pilot to something most of the company used regularly. But nobody could answer some basic questions:</p>
+      <ul class="deliverable-list">
+        <li>Who uses what, and which models?</li>
+        <li>What does it cost, by person and by department?</li>
+        <li>Which model should be the default for which kind of work?</li>
+        <li>What are people allowed to put into these tools?</li>
+        <li>When cost becomes a reason to approve or deny access, who decides?</li>
+      </ul>
+      <p class="cs-p" style="margin-top: 1.5rem;">I didn't want the answer to be "cut access." The people getting the most out of AI are often the ones spending the most. My goal was to make cost visible, put sensible defaults in place, and let people keep doing good work.</p>
+    </div>
+
+    <!-- SECTION 2: WHAT I BUILT -->
+    <div class="cs-section reveal">
+      <p class="cs-section-label">Section II</p>
+      <h2 class="cs-section-title">What I <em>Built</em></h2>
+      <p class="cs-p"><strong>A real baseline.</strong> I pulled usage and modeled spend from the enterprise analytics data and broke it down by surface (Chat, Code, Cowork), model and department. The first monthly baseline query came back about 5.6x too high. A plausibility check caught it before it went anywhere: we were reading the wrong column. I'd rather catch that myself than have Finance catch it for me.</p>
+      <p class="cs-p"><strong>Defaults instead of rules.</strong> Most of the cost lever turned out to be model mix, not usage. We changed the default models by surface, scheduled a legacy model's retirement, and put our most expensive model behind a short request workflow with manager and finance approval. Cost per million tokens came down meaningfully within a couple of months. Part of that is our default change and part is a vendor price change, and I report them separately.</p>
+      <p class="cs-p"><strong>Visibility people can use.</strong> Every user now gets a weekly personal chat message with their own usage and modeled spend by product and model, plus how they compare to their department's median. I built in a few deliberate limits:</p>
+      <ul class="deliverable-list">
+        <li>Comparisons only show for groups of five or more, and fall back to company-wide when a group is too small.</li>
+        <li>No names and no leaderboards.</li>
+        <li>Every dollar figure carries a "this is modeled, not billed" note.</li>
+        <li>It reads as a receipt, not a performance review.</li>
+      </ul>
+      <p class="cs-p" style="margin-top: 1.5rem;">For the do-it-yourself reporting I chose a metadata-only data source over one that reads conversation content. That was a privacy decision.</p>
+      <p class="cs-p"><strong>Policy that matches how people work.</strong> I drafted a new AI Acceptable Use Policy and reworked the companion AI lifecycle policy. That took twelve rounds of decisions in one day and an adversarial review that failed the first draft. The principle I pushed hardest for: usage data should help people use AI well. It should never be used to judge them.</p>
+      <p class="cs-p"><strong>Getting the regulatory scope right.</strong> I mapped our AI documentation to what each applicable standard actually requires, and cut work that no standard asked for. While doing that we checked our control citations against the licensed standard and found some that don't exist. Now the team has a rule: no clause number unless it's been checked against the real text.</p>
+    </div>
+
+    <!-- SECTION 3: HOW THE AI TEAM WORKS -->
+    <div class="cs-section reveal">
+      <p class="cs-section-label">Section III</p>
+      <h2 class="cs-section-title">How the AI Team <em>Works</em></h2>
+      <p class="cs-p">I run a team of 16 AI agents in Claude Code, including an orchestrator that routes the work. Each one has a role, a persona and a model tier. The orchestrator never does the work itself. I approve everything that leaves the team.</p>
+      <p class="cs-p">What changed this quarter is mostly how the team governs itself:</p>
+
+      <div class="principles">
+        <div class="principle">
+          <div class="principle-num">I</div>
+          <div>
+            <div class="principle-title">Delegated approval with no discretion</div>
+            <p class="principle-body">The orchestrator can pass along my approval only when I've explicitly approved that specific action, and each one gets an audit line. Hiring new agents and posting in public cross-team channels stay with me.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">II</div>
+          <div>
+            <div class="principle-title">Model tiers enforced at dispatch</div>
+            <p class="principle-body">We found that subagents were quietly inheriting the orchestrator's (more expensive) model. Now every dispatch names its model, and an end-of-session check flags any mismatch.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">III</div>
+          <div>
+            <div class="principle-title">Measured cost, not estimated</div>
+            <p class="principle-body">A script prices every session from the transcripts. When we find a data gap, I note it instead of adjusting the numbers.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">IV</div>
+          <div>
+            <div class="principle-title">Version control on the workspace</div>
+            <p class="principle-body">Reviewers check changes against a diff, not against the author's description.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">V</div>
+          <div>
+            <div class="principle-title">An adversarial QA agent</div>
+            <p class="principle-body">Its verdicts are written to disk. This quarter it rejected a policy draft, a new skill and an executive tracker before each one passed.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">VI</div>
+          <div>
+            <div class="principle-title">Expiration dates on facts</div>
+            <p class="principle-body">Any claim about a live system carries a re-check date based on what it would cost if it went stale.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="cs-p">The team now has 11 reusable skills. The newest one runs the full quarterly risk committee cycle: data pull, register updates, deck, minutes and follow-ups, with every write gated.</p>
+    </div>
+
+    <!-- SECTION 4: WHAT I LEARNED -->
+    <div class="cs-section reveal">
+      <p class="cs-section-label">Section IV</p>
+      <h2 class="cs-section-title">What I <em>Learned</em></h2>
+
+      <div class="principles">
+        <div class="principle">
+          <div class="principle-num">I</div>
+          <div>
+            <div class="principle-title">A check that compares a document to itself proves nothing.</div>
+            <p class="principle-body">Check against the inputs.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">II</div>
+          <div>
+            <div class="principle-title">A failed search is evidence about the search, not about the world.</div>
+            <p class="principle-body">We once flagged real quotes as "fabricated" because a search missed them.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">III</div>
+          <div>
+            <div class="principle-title">Plausible citations survive review.</div>
+            <p class="principle-body">Verify against the source or say you didn't.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">IV</div>
+          <div>
+            <div class="principle-title">Lower-cost defaults are a better first lever than restrictions.</div>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">V</div>
+          <div>
+            <div class="principle-title">When a number changes, label the change.</div>
+            <p class="principle-body">Don't quietly swap it.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">VI</div>
+          <div>
+            <div class="principle-title">Report the number that's true.</div>
+            <p class="principle-body">My hours-saved multiplier was about 9x when I audited it in August and ~7.9x at the last full dashboard refresh. For September to November it's about 4x, and that stretch hasn't been audited yet. The work shifted from one-time builds to running a program. That's what should happen, so I report it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section reveal">
+      <p class="cs-p"><em>This page describes my own work, and the views are my own. Built with Claude Code.</em></p>
+    </div>
+
+  </div>
+
+  <div class="back-footer">
+    <p>&copy; 2026 Alyssa Phillips</p>
+    <a href="index.html" class="back-link">&larr; Back to Portfolio</a>
+  </div>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); } });
+    }, { threshold: 0.06 });
+    reveals.forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
