@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Enterprise AI Program — Alyssa Phillips</title>
-  <meta name="description" content="Three months running an enterprise AI program: a real baseline, defaults instead of rules, visibility people can use, and policy that matches how people work." />
+  <meta name="description" content="How I run an enterprise AI program: cost per million tokens down 36–39%, a weekly usage receipt that names no one, and data that helps people, not judges them." />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Alyssa Phillips" />
   <meta property="og:url" content="https://avphillips11.github.io/ai-program.html" />
-  <meta property="og:title" content="Running an Enterprise AI Program with an AI Team" />
-  <meta property="og:description" content="Three months running an enterprise AI program: a real baseline, defaults instead of rules, visibility people can use, and policy that matches how people work." />
+  <meta property="og:title" content="Enterprise AI Program — Governing the Spend, Not the People" />
+  <meta property="og:description" content="How I run an enterprise AI program: cost per million tokens down 36–39%, a weekly usage receipt that names no one, and data that helps people, not judges them." />
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -145,8 +145,15 @@
 
   <div class="cs-hero reveal">
     <p class="cs-label">Case Study — Enterprise AI Program</p>
-    <h1 class="cs-title">Running an enterprise AI program <em>with an AI team</em></h1>
-    <p class="cs-tagline">Principal Program Manager, GRC &amp; AI Governance</p>
+    <h1 class="cs-title">Enterprise AI Program <em>Governing the Spend, Not the People</em></h1>
+    <p class="cs-tagline">A receipt, not a review.</p>
+  </div>
+
+  <div class="stats-bar reveal">
+    <div class="stat-cell"><div class="stat-n">36–39%</div><div class="stat-l">Lower Cost per Million Tokens</div></div>
+    <div class="stat-cell"><div class="stat-n">~5.6x</div><div class="stat-l">Baseline Error Caught</div></div>
+    <div class="stat-cell"><div class="stat-n">12</div><div class="stat-l">Rounds of Policy Decisions</div></div>
+    <div class="stat-cell"><div class="stat-n">0</div><div class="stat-l">Names in Usage Comparisons</div></div>
   </div>
 
   <div class="divider"><div class="divider-line"></div><div class="divider-mark"></div><div class="divider-line"></div></div>
@@ -178,7 +185,7 @@
       <p class="cs-section-label">Section II</p>
       <h2 class="cs-section-title">What I <em>Built</em></h2>
       <p class="cs-p"><strong>A real baseline.</strong> I pulled usage and modeled spend from the enterprise analytics data and broke it down by surface (Chat, Code, Cowork), model and department. The first monthly baseline query came back about 5.6x too high. A plausibility check caught it before it went anywhere: we were reading the wrong column. I'd rather catch that myself than have Finance catch it for me.</p>
-      <p class="cs-p"><strong>Defaults instead of rules.</strong> Most of the cost lever turned out to be model mix, not usage. We changed the default models by surface, scheduled a legacy model's retirement, and put our most expensive model behind a short request workflow with manager and finance approval. Cost per million tokens came down meaningfully within a couple of months. Part of that is our default change and part is a vendor price change, and I report them separately.</p>
+      <p class="cs-p"><strong>Defaults instead of rules.</strong> Most of the cost lever turned out to be model mix, not usage. We changed the default models by surface, scheduled a legacy model's retirement, and put our most expensive model behind a short request workflow with manager and finance approval. Cost per million tokens fell 36–39% in about two months, almost all of it from usage moving to a newer, cheaper model. We made it the default. The lower price was the vendor's, and the report to leadership split the credit that way.</p>
       <p class="cs-p"><strong>Visibility people can use.</strong> Every user now gets a weekly personal chat message with their own usage and modeled spend by product and model, plus how they compare to their department's median. I built in a few deliberate limits:</p>
       <ul class="deliverable-list">
         <li>Comparisons only show for groups of five or more, and fall back to company-wide when a group is too small.</li>
@@ -188,6 +195,7 @@
       </ul>
       <p class="cs-p" style="margin-top: 1.5rem;">For the do-it-yourself reporting I chose a metadata-only data source over one that reads conversation content. That was a privacy decision.</p>
       <p class="cs-p"><strong>Policy that matches how people work.</strong> I drafted a new AI Acceptable Use Policy and reworked the companion AI lifecycle policy. That took twelve rounds of decisions in one day and an adversarial review that failed the first draft. The principle I pushed hardest for: usage data should help people use AI well. It should never be used to judge them.</p>
+      <p class="cs-p"><strong>Two gates, not one.</strong> Cost is the department budget owner's call. Security, governance and privacy are the governance committee's. Neither substitutes for the other. I found program documents sending cost approvals to the committee and fixed them.</p>
       <p class="cs-p"><strong>Getting the regulatory scope right.</strong> I mapped our AI documentation to what each applicable standard actually requires, and cut work that no standard asked for. While doing that we checked our control citations against the licensed standard and found some that don't exist. Now the team has a rule: no clause number unless it's been checked against the real text.</p>
     </div>
 
